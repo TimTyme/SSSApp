@@ -5,6 +5,11 @@ define('APPLICATION_NAME', 'List test');
 define('CREDENTIALS_PATH', '~/.credentials/calendar-php-quickstart.json');
 define('CLIENT_SECRET_PATH', __DIR__ . '/client_secret.json');
 
+$dayLightSaving = '05:00';
+if (date('I')) {
+	$dayLightSaving = '04:00';
+}
+
 function getClient()
 {
 	$client = new Google_Client();
@@ -65,12 +70,14 @@ $optParams = array(
 	'maxResults' => 10,
 	'orderBy' => 'startTime',
 	'singleEvents' => TRUE,
-	'timeMin' => date('c'),
+	'timeMin' => '2017-04-04T12:00:00-' . $dayLightSaving,
+	'timeMax'=> '2017-04-04T13:15:00-'. $dayLightSaving,
 );
 $results = $service->events->listEvents($calendarId, $optParams);
 
 if (count($results->getItems()) == 0) {
 	print "No upcoming events found.\n";
+	print date('I');
 } else {
 	print "Upcoming events:\n";
 	foreach ($results->getItems() as $event) {

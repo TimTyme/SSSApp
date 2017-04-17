@@ -1,23 +1,42 @@
+<?php
+include_once './listtest.php';
+?>
+
 <!doctype html>
 <html class="no-js" lang="">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title></title>
+    <title>Schedule a Mentor Meeting</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="include/jqtime/include/ui-1.10.0/ui-lightness/jquery-ui-1.10.0.custom.min.css" type="text/css">
+    <link rel="stylesheet" href="include/jqtime/jquery.ui.timepicker.css" type="text/css">
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-    <script src="js/jquery-3.2.0.js"></script>
-    <script src="js/vali/dist/jquery.validate.js"></script>
 
+    <script type="text/javascript" src="include/jqtime/include/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="include/jqtime/include/ui-1.10.0/jquery.ui.core.min.js"></script>
+    <script type="text/javascript" src="include/jqtime/include/ui-1.10.0/jquery.ui.widget.min.js"></script>
+    <script type="text/javascript" src="include/jqtime/include/ui-1.10.0/jquery.ui.tabs.min.js"></script>
+    <script type="text/javascript" src="include/jqtime/include/ui-1.10.0/jquery.ui.position.min.js"></script>
 
-    <?php
-    $Fname = $_POST['fname'];
-    ?>
+    <script type="text/javascript" src="include/jqtime/jquery.ui.timepicker.js"></script>
+
+	<?php
+	$stime = $_POST['timepicker'];
+    $client = getClient();
+    $service = new Google_Service_Calendar($client);
+    $calendarId = 'primary';
+    $optParms = array('maxResults' => 1,
+        'orderBy' => 'startTime',
+        'singleEvents' => TRUE,
+        'timeMin' => )
+
+	?>
 </head>
 <body>
 <!--[if lt IE 8]>
@@ -25,20 +44,22 @@
     your browser</a> to improve your experience.</p>
 <![endif]-->
 <!-- Add your site or application content here -->
-<p>SHould be hidden</p>
 <form action="<?php echo basename($_SERVER['PHP_SELF']); ?>" method="post">
     <fieldset>
-        <legend>Session:</legend>
-        Date:<br> <input type="text" name="sdate"><br>
-        Start Time:<br><input type="text" name="sstart"><br>
-        End Time:<br><input type="text" name="send"><br>
-        Session Summary:<br><textarea name="summary" rows="10" cols="30"></textarea>
+        <legend>Appointment Time:</legend>
+        Date(mm/dd/yyyy):<br> <input type="text" name="date"><br>
+        Start Time:<br><label>
+            <input type="text" name="start" id="timepicker" readonly="readonly">
+        </label><br>
+        <input type="submit" value="Submit" name="subBtn" >
     </fieldset>
-    <input type="submit" value="Submit">
 
+
+	<?php
+	echo strtotime($date);
+	?>
 
 </form>
-<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
 <script src="js/plugins.js"></script>
 <script src="js/main.js"></script>

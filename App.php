@@ -15,8 +15,6 @@
     <?php
     $date = $_POST['date'];
     $stime = $_POST['start'];
-    $etime = $_POST['end'];
-    $notes = $_POST['summary'];
 
 
     ?>
@@ -31,9 +29,9 @@
     <fieldset>
         <legend>Session:</legend>
         Date(mm/dd/yyyy):<br> <input type="text" name="date"><br>
-        Start Time(:<br><input type="text" name="start"><br>
-        End Time:<br><input type="text" name="end"><br>
-        Session Summary:<br><textarea name="summary" rows="10" cols="30"></textarea>
+        Start Time(:<br><label>
+            <input type="text" name="start">
+        </label><br>
     </fieldset>
     <input type="submit" value="Submit">
     <?php
